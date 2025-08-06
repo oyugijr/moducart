@@ -1,0 +1,12 @@
+{
+  "name": "basket-api",
+  "version": "1.0.0",
+  "description": "Manages each user's shopping cart using Redis for fast in-memory storage.",
+  "license": "ISC",
+  "author": "oyugijr",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
