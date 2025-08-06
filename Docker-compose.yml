@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   api-gateway:
@@ -11,15 +11,6 @@ services:
       - discount-api
       - ordering-api
 
-  catalog-api:
-    build: ./catalog-api
-    ports:
-      - "4001:4001"
-    environment:
-      - MONGO_URL=mongodb://mongo:27017/catalog
-    depends_on:
-      - mongo
-
   basket-api:
     build: ./basket-api
     ports:
@@ -29,60 +20,60 @@ services:
     depends_on:
       - redis
 
-  discount-api:
-    build: ./discount-api
-    ports:
-      - "4003:4003"
-    environment:
-      - PG_HOST=postgres
-      - PG_USER=postgres
-      - PG_PASSWORD=postgres
-      - PG_DB=discounts
-    depends_on:
-      - postgres
+  # discount-api:
+  #   build: ./discount-api
+  #   ports:
+  #     - "4003:4003"
+  #   environment:
+  #     - PG_HOST=postgres
+  #     - PG_USER=postgres
+  #     - PG_PASSWORD=postgres
+  #     - PG_DB=discounts
+  #   depends_on:
+  #     - postgres
 
-  ordering-api:
-    build: ./ordering-api
-    ports:
-      - "4004:4004"
-    environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_DB=orders
-    depends_on:
-      - mysql
-      - rabbitmq
+  # ordering-api:
+  #   build: ./ordering-api
+  #   ports:
+  #     - "4004:4004"
+  #   environment:
+  #     - MYSQL_HOST=mysql
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=root
+  #     - MYSQL_DB=orders
+  #   depends_on:
+  #     - mysql
+  #     - rabbitmq
 
-  mongo:
-    image: mongo:6
-    ports:
-      - "27017:27017"
+  # mongo:
+  #   image: mongo:6
+  #   ports:
+  #     - "27017:27017"
 
   redis:
     image: redis:7
     ports:
       - "6379:6379"
 
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: discounts
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+  # postgres:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: discounts
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - "5432:5432"
 
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_DATABASE: orders
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
+  # mysql:
+  #   image: mysql:8
+  #   environment:
+  #     MYSQL_DATABASE: orders
+  #     MYSQL_ROOT_PASSWORD: root
+  #   ports:
+  #     - "3306:3306"
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"  # Web UI
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"  # Web UI
