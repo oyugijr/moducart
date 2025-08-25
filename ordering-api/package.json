@@ -1,0 +1,17 @@
+{
+  "name": "ordering-api",
+  "version": "1.0.0",
+  "description": "Manages ordering ",
+  "license": "ISC",
+  "author": "oyugijr",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.8",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.3"
+  }
+}
