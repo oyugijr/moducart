@@ -1,15 +1,15 @@
 version: "3.9"
 
 services:
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - "3000:3000"
-    depends_on:
-      - catalog-api
-      - basket-api
-      - discount-api
-      - ordering-api
+  # api-gateway:
+  #   build: ./api-gateway
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - catalog-api
+  #     - basket-api
+  #     - discount-api
+  #     - ordering-api
 
   basket-api:
     build: ./basket-api
@@ -32,18 +32,19 @@ services:
   #   depends_on:
   #     - postgres
 
-  # ordering-api:
-  #   build: ./ordering-api
-  #   ports:
-  #     - "4004:4004"
-  #   environment:
-  #     - MYSQL_HOST=mysql
-  #     - MYSQL_USER=root
-  #     - MYSQL_PASSWORD=root
-  #     - MYSQL_DB=orders
-  #   depends_on:
-  #     - mysql
-  #     - rabbitmq
+  ordering-api:
+    build: ./ordering-api
+    ports:
+      - "4004:4004"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Oyugi222f
+      - MYSQL_DB=ordersdb
+      - RABBIT_HOST=rabbitmq
+    depends_on:
+      - mysql
+      - rabbitmq
 
   # mongo:
   #   image: mongo:6
@@ -64,16 +65,21 @@ services:
   #   ports:
   #     - "5432:5432"
 
-  # mysql:
-  #   image: mysql:8
-  #   environment:
-  #     MYSQL_DATABASE: orders
-  #     MYSQL_ROOT_PASSWORD: root
-  #   ports:
-  #     - "3306:3306"
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: Oyugi222f
+      MYSQL_DATABASE: ordersdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  # rabbitmq:
-  #   image: rabbitmq:3-management
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"  # Web UI
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672" # Management UI
+
+volumes:
+  mysql_data:
