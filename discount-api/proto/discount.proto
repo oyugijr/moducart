@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package discount;
+
+// Request message
+message DiscountRequest {
+  string productId = 1;
+}
+
+// Response message
+message DiscountResponse {
+  string productId = 1;
+  double discountPercentage = 2;
+  string description = 3;
+}
+
+// Discount gRPC service
+service DiscountService {
+  rpc GetDiscount(DiscountRequest) returns (DiscountResponse);
+}
