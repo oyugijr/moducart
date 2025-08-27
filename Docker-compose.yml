@@ -20,17 +20,19 @@ services:
     depends_on:
       - redis
 
-  # discount-api:
-  #   build: ./discount-api
-  #   ports:
-  #     - "4003:4003"
-  #   environment:
-  #     - PG_HOST=postgres
-  #     - PG_USER=postgres
-  #     - PG_PASSWORD=postgres
-  #     - PG_DB=discounts
-  #   depends_on:
-  #     - postgres
+  discount-api:
+    build: .
+    ports:
+      - "4000:4000"
+      - "50051:50051"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: discountdb
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    depends_on:
+      - db
 
   ordering-api:
     build: ./ordering-api
@@ -56,14 +58,18 @@ services:
     ports:
       - "6379:6379"
 
-  # postgres:
-  #   image: postgres:15
-  #   environment:
-  #     POSTGRES_DB: discounts
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #   ports:
-  #     - "5432:5432"
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: discountdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - discount_data:/var/lib/postgresql/data
+      - ./discount-api/db/init:/docker-entrypoint-initdb.d
 
   mysql:
     image: mysql:8
