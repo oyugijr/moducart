@@ -11,6 +11,20 @@ services:
   #     - discount-api
   #     - ordering-api
 
+  catalog-api:
+    build: .
+    container_name: catalog-api
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+
   basket-api:
     build: ./basket-api
     ports:
@@ -48,10 +62,13 @@ services:
       - mysql
       - rabbitmq
 
-  # mongo:
-  #   image: mongo:6
-  #   ports:
-  #     - "27017:27017"
+  mongo:
+    image: mongo:5
+    container_name: catalog-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
 
   redis:
     image: redis:7
@@ -89,3 +106,4 @@ services:
 
 volumes:
   mysql_data:
+  mongo_data:
