@@ -1,0 +1,64 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+log/
+debug.log
+error.log
+
+# Build directories
+dist/
+build/
+coverage/
+.next/
+out/
+.cache/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+.docker/
+*.pid
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files (local)
+*.sqlite
+*.db
+data/
+pg_data/
+mongo_data/
+redis_data/
+mysql_data/
+
+# Test results
+*.lcov
+jest-html-reporters-*
+
+# Misc
+*.bak
+*.old
+*.orig

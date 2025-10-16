@@ -1,10 +1,10 @@
 # 🗺️ Implementation Roadmap: Learn-By-Building Approach
 
-### **Phase 1: Foundation & Core Infrastructure (Week 1-2)**
+## **Phase 1: Foundation & Core Infrastructure (Week 1-2)**
 
 **Goal**: Setup development environment and basic microservices communication
 
-```
+```text
 📋 Tasks:
 ✅ Initialize project structure (we've done this)
 ✅ Docker Compose setup for all services
@@ -25,7 +25,7 @@
 
 **Goal**: Implement secure user registration, login, and session management
 
-```
+```text
 📋 Tasks:
 ✅ Create User Service (new microservice)
 ✅ User registration with password hashing (bcrypt)
@@ -53,7 +53,7 @@
 
 **Goal**: Build product catalog with CRUD operations
 
-```
+```text
 📋 Tasks:
 ✅ Product model with MongoDB
 ✅ CRUD operations for products
@@ -80,7 +80,7 @@
 
 **Goal**: Implement shopping cart functionality
 
-```
+```text
 📋 Tasks:
 ✅ Redis-based basket service
 ✅ Add/remove items from cart
@@ -105,7 +105,7 @@
 
 **Goal**: Complete order processing workflow
 
-```
+```text
 📋 Tasks:
 ✅ Order creation from cart
 ✅ Order status tracking
@@ -131,7 +131,7 @@
 
 **Goal**: Implement discount service with gRPC
 
-```
+```text
 📋 Tasks:
 ✅ gRPC service definition
 ✅ Discount code management
@@ -156,7 +156,7 @@
 
 **Goal**: Comprehensive security implementation and testing
 
-```
+```text
 📋 Tasks:
 ✅ Input validation middleware
 ✅ XSS protection
@@ -184,7 +184,7 @@
 
 **Goal**: Deploy application and setup monitoring
 
-```
+```text
 📋 Tasks:
 ✅ Production Docker configuration
 ✅ Environment variable management
@@ -210,7 +210,7 @@
 
 ### **Weekly Structure:**
 
-```
+```text
 Monday-Wednesday: Core Implementation
 - Build features according to phase
 - Focus on functionality
