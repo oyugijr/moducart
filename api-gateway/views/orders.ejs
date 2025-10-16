@@ -1,0 +1,8 @@
+<%- include('layouts/main', { body: `
+  <section>
+    <h2>Your Orders</h2>
+    <ul>
+      ${orders.map(o => `<li>Order #${o.id} - Total: $${o.total}</li>`).join('')}
+    </ul>
+  </section>
+` }) %>

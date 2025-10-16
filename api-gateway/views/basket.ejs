@@ -1,0 +1,8 @@
+<%- include('layouts/main', { body: `
+  <section>
+    <h2>Your Basket</h2>
+    <ul>
+      ${basket.map(item => `<li>${item.name} - Qty: ${item.quantity}</li>`).join('')}
+    </ul>
+  </section>
+` }) %>

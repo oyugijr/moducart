@@ -1,0 +1,14 @@
+<%- include('layouts/main', { body: `
+  <section>
+    <h2>Available Products</h2>
+    <div class="product-list">
+      ${products.map(p => `
+        <div class="product">
+          <h3>${p.name}</h3>
+          <p>${p.description}</p>
+          <p>Price: $${p.price}</p>
+        </div>
+      `).join('')}
+    </div>
+  </section>
+` }) %>
