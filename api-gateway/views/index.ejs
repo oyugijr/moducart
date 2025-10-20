@@ -1,6 +1,25 @@
-<%- include('layouts/main', { body: `
-  <section>
-    <h2>Welcome to ModuCart</h2>
-    <p>Browse products, manage your basket, and view your orders.</p>
-  </section>
-` }) %>
+<% layout('layouts/main') %>
+
+<div class="text-center py-5 bg-light rounded">
+  <h1>Welcome to ModuCart</h1>
+  <p class="lead">Shop your favorite products with ease.</p>
+  <a href="/products" class="btn btn-primary btn-lg">Start Shopping</a>
+</div>
+
+<section class="mt-5">
+  <h2>Featured Products</h2>
+  <div class="row mt-4">
+    <% featured.forEach(product => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= product.image %>" class="card-img-top" alt="<%= product.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p>$<%= product.price %></p>
+            <a href="/products/<%= product.id %>" class="btn btn-outline-primary">View</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</section>

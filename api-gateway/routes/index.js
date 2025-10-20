@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("index", { title: "Welcome to ModuCart" });
+  res.redirect("/auth/login");
 });
 
 export default router;
