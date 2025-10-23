@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API Gateway and Admin Dashboard for ModuCart",
   "main": "app.js",
+  "author": "Oyugi",
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
