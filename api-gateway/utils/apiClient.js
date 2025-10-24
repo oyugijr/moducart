@@ -14,8 +14,10 @@ const orderingBase = process.env.ORDERING_API_URL || "http://localhost:4004";
 const client = {
   async get(path, opts = {}) {
     if (path.startsWith("/catalog")) {
+      // forward /catalog/whatever -> {CATALOG_BASE}/api/whatever
       const p = path.replace("/catalog", "");
-      const res = await axios.get(`${catalogBase}/api/products${p}`, opts);
+      const url = `${catalogBase}/api${p}`;
+      const res = await axios.get(url, opts);
       return res.data;
     }
     if (path.startsWith("/orders")) {
@@ -32,7 +34,13 @@ const client = {
       const res = await axios.post(`${orderingBase}/orders`, body, opts);
       return res.data;
     }
-    // fallback
+    if (path.startsWith("/catalog")) {
+      // forward POST /catalog/... to catalog service
+      const p = path.replace("/catalog", "");
+      const res = await axios.post(`${catalogBase}/api${p}`, body, opts);
+      return res.data;
+    }
+    // fallback to ordering service
     const res = await axios.post(`${orderingBase}${path}`, body, opts);
     return res.data;
   }

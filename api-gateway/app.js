@@ -23,6 +23,8 @@ const __dirname = path.dirname(__filename);
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+// Default layout for ejs-mate: can be overridden per-view with `layout('...')`
+app.locals.layout = 'layouts/main';
 // Use express-ejs-layouts so views can call `layout(...)`
 // app.use(expressLayouts);
 
@@ -54,6 +56,9 @@ app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/api", apiRoutes);
+
+// Health check
+app.get('/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 // Error handler
 app.use(errorHandler);
