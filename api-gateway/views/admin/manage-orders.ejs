@@ -1,0 +1,17 @@
+<% layout('layouts/admin') %>
+<h4>Orders</h4>
+<table class="table">
+  <thead><tr><th>#</th><th>Order ID</th><th>User</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% (orders || []).forEach((o,i) => { %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= o.id || o.orderId %></td>
+        <td><%= o.userId || '—' %></td>
+        <td>$<%= o.total || 0 %></td>
+        <td><%= o.status || 'PENDING' %></td>
+        <td><a href="#" class="btn btn-sm btn-outline-secondary">View</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

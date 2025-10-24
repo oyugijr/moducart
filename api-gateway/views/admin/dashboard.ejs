@@ -1,0 +1,48 @@
+<% layout('layouts/admin') %>
+
+<div class="row g-3">
+  <div class="col-md-3">
+    <div class="card-small">
+      <h6>Products</h6>
+      <h3><%= stats.products %></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-small">
+      <h6>Orders</h6>
+      <h3><%= stats.orders %></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-small">
+      <h6>Users</h6>
+      <h3><%= stats.users %></h3>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-small">
+      <h6>Revenue</h6>
+      <h3>$<%= stats.revenue %></h3>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h5>Recent Orders</h5>
+  <table class="table table-sm">
+    <thead>
+      <tr><th>Order ID</th><th>User</th><th>Total</th><th>Status</th><th>Date</th></tr>
+    </thead>
+    <tbody>
+      <% (orders || []).slice(0,6).forEach(o => { %>
+        <tr>
+          <td><%= o.id || o.orderId || '—' %></td>
+          <td><%= o.userId || '—' %></td>
+          <td>$<%= o.total || '0.00' %></td>
+          <td><%= o.status || 'PENDING' %></td>
+          <td><%= o.createdAt ? new Date(o.createdAt).toLocaleString() : '—' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
