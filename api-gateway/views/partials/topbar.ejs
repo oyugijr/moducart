@@ -1,0 +1,11 @@
+<header class="topbar">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div>
+      <button class="btn btn-sm btn-light d-md-none" id="sidebarToggle">☰</button>
+      <strong>Admin</strong>
+    </div>
+    <div>
+      <span class="me-3">Hello, <%= user?.name || user?.username || "Admin" %></span>
+    </div>
+  </div>
+</header>
