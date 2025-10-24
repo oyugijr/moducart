@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import ejsMate from "ejs-mate";
+// import expressLayouts from "express-ejs-layouts";
 import { fileURLToPath } from "url";
 
 import indexRoutes from "./routes/index.js";
@@ -18,8 +20,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // View engine
+app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+// Use express-ejs-layouts so views can call `layout(...)`
+// app.use(expressLayouts);
 
 // Static
 app.use(express.static(path.join(__dirname, "public")));
