@@ -9,7 +9,9 @@ export const renderDashboard = async (req, res, next) => {
     ]);
 
     const productsCount = productsRes.status === "fulfilled" ? productsRes.value.length : 0;
-    const ordersCount = ordersRes.status === "fulfilled" ? ordersRes.value.length : 0;
+  const ordersCount = ordersRes.status === "fulfilled" ? ordersRes.value.length : 0;
+  // Provide a recent orders array for the dashboard view
+  const orders = ordersRes.status === "fulfilled" ? ordersRes.value : [];
 
     const stats = {
       products: productsCount,
@@ -18,7 +20,7 @@ export const renderDashboard = async (req, res, next) => {
       revenue: 0
     };
 
-    res.render("admin/dashboard", { title: "Dashboard", stats, user: req.session.user });
+  res.render("admin/dashboard", { title: "Dashboard", stats, orders, user: req.session.user });
   } catch (err) {
     next(err);
   }
