@@ -7,42 +7,83 @@ const basketBase = process.env.BASKET_API_URL || "http://localhost:4002";
 const discountBase = process.env.DISCOUNT_API_URL || "http://localhost:4003";
 const orderingBase = process.env.ORDERING_API_URL || "http://localhost:4004";
 
+// timeout in ms for upstream requests (configurable via env)
+const API_CLIENT_TIMEOUT = parseInt(process.env.API_CLIENT_TIMEOUT, 10) || 3000;
+
+// create an axios instance that enforces timeouts
+const axiosInstance = axios.create({ timeout: API_CLIENT_TIMEOUT });
+
+function handleAxiosError(err, url) {
+  // timeout
+  if (err.code === "ECONNABORTED") {
+    const e = new Error(`Request to ${url} timed out after ${API_CLIENT_TIMEOUT}ms`);
+    e.status = 504;
+    throw e;
+  }
+  // upstream responded with an error code
+  if (err.response) {
+    const status = err.response.status;
+    const msg = `Upstream service returned ${status} for ${url}`;
+    const e = new Error(msg);
+    e.status = status;
+    e.upstream = err.response.data;
+    throw e;
+  }
+  // network / other error
+  const e = new Error(`Network error requesting ${url}: ${err.message || err}`);
+  throw e;
+}
+
 /**
  * Basic client exposing get/post to known services.
  * Paths passed in should start with /catalog, /basket, /discount, /orders etc.
  */
 const client = {
   async get(path, opts = {}) {
-    if (path.startsWith("/catalog")) {
-      // forward /catalog/whatever -> {CATALOG_BASE}/api/whatever
-      const p = path.replace("/catalog", "");
-      const url = `${catalogBase}/api${p}`;
-      const res = await axios.get(url, opts);
+    try {
+      if (path.startsWith("/catalog")) {
+        // forward /catalog/whatever -> {CATALOG_BASE}/api/whatever
+        const p = path.replace("/catalog", "");
+        const url = `${catalogBase}/api${p}`;
+        const res = await axiosInstance.get(url, opts);
+        return res.data;
+      }
+      if (path.startsWith("/orders")) {
+        const url = `${orderingBase}/orders`;
+        const res = await axiosInstance.get(url, opts);
+        return res.data;
+      }
+      // fallback: try ordering
+      const url = `${orderingBase}${path}`;
+      const res = await axiosInstance.get(url, opts);
       return res.data;
+    } catch (err) {
+      // unify errors to be meaningful to callers
+      handleAxiosError(err, path);
     }
-    if (path.startsWith("/orders")) {
-      const res = await axios.get(`${orderingBase}/orders`, opts);
-      return res.data;
-    }
-    // fallback: try ordering
-    const res = await axios.get(`${orderingBase}${path}`, opts);
-    return res.data;
   },
 
   async post(path, body, opts = {}) {
-    if (path.startsWith("/orders")) {
-      const res = await axios.post(`${orderingBase}/orders`, body, opts);
+    try {
+      if (path.startsWith("/orders")) {
+        const url = `${orderingBase}/orders`;
+        const res = await axiosInstance.post(url, body, opts);
+        return res.data;
+      }
+      if (path.startsWith("/catalog")) {
+        // forward POST /catalog/... to catalog service
+        const p = path.replace("/catalog", "");
+        const url = `${catalogBase}/api${p}`;
+        const res = await axiosInstance.post(url, body, opts);
+        return res.data;
+      }
+      // fallback to ordering service
+      const url = `${orderingBase}${path}`;
+      const res = await axiosInstance.post(url, body, opts);
       return res.data;
+    } catch (err) {
+      handleAxiosError(err, path);
     }
-    if (path.startsWith("/catalog")) {
-      // forward POST /catalog/... to catalog service
-      const p = path.replace("/catalog", "");
-      const res = await axios.post(`${catalogBase}/api${p}`, body, opts);
-      return res.data;
-    }
-    // fallback to ordering service
-    const res = await axios.post(`${orderingBase}${path}`, body, opts);
-    return res.data;
   }
 };
 
