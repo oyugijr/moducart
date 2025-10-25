@@ -123,6 +123,6 @@
 ## Future Enhancements
 
 - Add authentication via JWT  
-- Integrate Stripe or M-Pesa for payments  
+- Integrate Stripe and  M-Pesa for payments  
 - Add dashboard analytics  
 - Implement service discovery via Nginx or Consul  
