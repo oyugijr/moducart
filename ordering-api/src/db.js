@@ -4,7 +4,7 @@ const DEFAULTS = {
   host: process.env.MYSQL_HOST || 'localhost',
   port: parseInt(process.env.MYSQL_PORT, 10) || 3306,
   user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || '',
+  password: process.env.MYSQL_PASSWORD || 'Oyugi222f',
   // Accept either MYSQL_DATABASE or MYSQL_DB for compatibility
   database: process.env.MYSQL_DATABASE || process.env.MYSQL_DB || 'ordersdb',
   waitForConnections: true,
