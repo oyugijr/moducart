@@ -8,10 +8,10 @@ export const renderDashboard = async (req, res, next) => {
       apiClient.get("/orders")
     ]);
 
-    const productsCount = productsRes.status === "fulfilled" ? productsRes.value.length : 0;
-  const ordersCount = ordersRes.status === "fulfilled" ? ordersRes.value.length : 0;
-  // Provide a recent orders array for the dashboard view
-  const orders = ordersRes.status === "fulfilled" ? ordersRes.value : [];
+    const productsCount = productsRes.status === "fulfilled" ? (Array.isArray(productsRes.value) ? productsRes.value.length : 0) : 0;
+    const ordersCount = ordersRes.status === "fulfilled" ? (Array.isArray(ordersRes.value) ? ordersRes.value.length : 0) : 0;
+    // Provide a recent orders array for the dashboard view
+    const orders = ordersRes.status === "fulfilled" && Array.isArray(ordersRes.value) ? ordersRes.value : [];
 
     const stats = {
       products: productsCount,
@@ -20,7 +20,18 @@ export const renderDashboard = async (req, res, next) => {
       revenue: 0
     };
 
-  res.render("admin/dashboard", { title: "Dashboard", stats, orders, user: req.session.user });
+    // Collect service errors to show a friendly message in the UI
+    const serviceErrors = [];
+    if (productsRes.status === 'rejected') {
+      console.warn('Catalog service error:', productsRes.reason?.message || productsRes.reason);
+      serviceErrors.push(productsRes.reason?.message || 'Catalog service unavailable');
+    }
+    if (ordersRes.status === 'rejected') {
+      console.warn('Ordering service error:', ordersRes.reason?.message || ordersRes.reason);
+      serviceErrors.push(ordersRes.reason?.message || 'Ordering service unavailable');
+    }
+
+    res.render("admin/dashboard", { title: "Dashboard", stats, orders, user: req.session.user, serviceErrors });
   } catch (err) {
     next(err);
   }

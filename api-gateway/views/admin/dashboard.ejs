@@ -1,4 +1,18 @@
 <% layout('layouts/admin') %>
+<>
+
+<% if (serviceErrors && serviceErrors.length) { %>
+  <div class="mb-3">
+    <div class="alert alert-warning">
+      <strong>Some backend services are unavailable:</strong>
+      <ul>
+        <% serviceErrors.forEach(err => { %>
+          <li><%= err %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+<% } %>
 
 <div class="row g-3">
   <div class="col-md-3">
