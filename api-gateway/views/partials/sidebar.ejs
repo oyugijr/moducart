@@ -1,4 +1,4 @@
-<div class="p-3">
+<!-- <div class="p-3">
   <div class="mb-4 text-center">
     <img src="/images/logo.png" alt="ModuCart" style="height:48px">
     <h6 class="mt-2">ModuCart</h6>
@@ -17,4 +17,41 @@
       </form>
     </li>
   </ul>
-</div>
+</div> -->
+
+<% const _active = (typeof active === 'string') ? active : ''; %>
+
+<div id="wrapper">
+  <div id="layout-static">
+    <div class="static-sidebar-wrapper sidebar-midnightblue">
+      <div class="static-sidebar">
+        <div class="sidebar">
+          <div class="widget">
+            <div class="widget-body">
+              <div class="userinfo">
+                <div class="avatar">
+                        <img src="/public/images/default_user.png" class="img-responsive img-circle" width="60" alt="">
+                </div>
+                <div class="info">
+                  <span class="username">Moducart</span>
+                  <span class="useremail">admin@moducart.local</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget stay-on-collapse" id="widget-sidebar">
+            <nav class="widget-body">
+              <ul class="acc-menu">
+                <li class="<%= _active === 'all' ? 'active' : '' %>"><a href="/admin/dashboard"><i class="fa fa-tint"></i><span>Dashboard</span></a></li>
+                <li class="<%= _active === 'Products' ? 'active' : '' %>"><a href="/admin/manage-products"><i class="ti ti-location-arrow"></i><span>Products</span></a></li>
+                <li class="<%= _active === 'Orders' ? 'active' : '' %>"><a href="/admin/manage-orders"><i class="fa fa-cogs"></i><span>Orders</span></a></li>
+                <li class="<%= _active === 'users' ? 'active' : '' %>"><a href="/admin/manage-users"><i class="fa fa-users"></i><span>Users</span></a></li>
+                <li class="<%= _active === 'reports' ? 'active' : '' %>"><a href="/admin/reports"><i class="fa fa-file-excel-o"></i><span>Reports</span></a></li>
+                <li class="<%= _active === 'settings' ? 'active' : '' %>"><a href="/admin/settings"><i class="fa fa-file-excel-o"></i><span>Settings</span></a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
