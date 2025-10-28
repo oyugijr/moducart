@@ -8,16 +8,26 @@ export const renderDashboard = async (req, res, next) => {
       apiClient.get("/orders")
     ]);
 
-    const productsCount = productsRes.status === "fulfilled" ? (Array.isArray(productsRes.value) ? productsRes.value.length : 0) : 0;
-    const ordersCount = ordersRes.status === "fulfilled" ? (Array.isArray(ordersRes.value) ? ordersRes.value.length : 0) : 0;
-    // Provide a recent orders array for the dashboard view
+    // Normalize product and order lists (be defensive about upstream shapes)
+    const products = productsRes.status === "fulfilled" && Array.isArray(productsRes.value) ? productsRes.value : [];
     const orders = ordersRes.status === "fulfilled" && Array.isArray(ordersRes.value) ? ordersRes.value : [];
 
+    // Compute dashboard-friendly metrics
+    const totalProducts = products.length;
+    const totalOrders = orders.length;
+    const completedOrders = orders.filter(o => ((o.status || '').toString().toLowerCase() === 'completed')).length;
+    const pendingOrders = totalOrders - completedOrders;
+    const totalEarnings = orders.reduce((sum, o) => {
+      const n = Number(o.total ?? o.amount ?? o.totalAmount ?? 0) || 0;
+      return sum + n;
+    }, 0);
+
     const stats = {
-      products: productsCount,
-      orders: ordersCount,
-      users: 0,
-      revenue: 0
+      completedOrders,
+      pendingOrders,
+      // keep revenue as a number; view will format and add currency prefix
+      revenue: Number(totalEarnings.toFixed(2)),
+      products: totalProducts
     };
 
     // Collect service errors to show a friendly message in the UI

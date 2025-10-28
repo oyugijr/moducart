@@ -1,0 +1,108 @@
+/* Admin dashboard styles tuned to match provided screenshot
+   - stat cards at top with small icon box on the left and large value on the right
+   - white canvas area below for charts/widgets
+   - styles intentionally scoped to avoid impacting global styles
+*/
+
+body.admin-layout {
+  background: #f5f6f7;
+}
+
+.stats-row {
+  margin-top: 12px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 18px 22px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  min-height: 110px;
+}
+
+.stat-card .stat-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background: #093b3f; /* darker teal */
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-right: 18px;
+}
+
+.stat-card .stat-body {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.stat-card .stat-left {
+  display:flex;
+  flex-direction:column;
+}
+
+.stat-card .stat-label {
+  font-size: 0.78rem;
+  color: #6c757d;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card .stat-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.dashboard-canvas {
+  background: #fff;
+  min-height: 420px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.placeholder-canvas {
+  height: 380px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#e2e2e2;
+  font-size:1.1rem;
+}
+
+/* Tighter table look for recent orders */
+.table-sm th, .table-sm td { vertical-align: middle; }
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .stat-card { padding:12px; }
+  .stat-card .stat-icon { width:52px; height:52px; }
+  .stat-card .stat-value { font-size:1.4rem; }
+}
+
+/* Sidebar styles */
+.admin-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #0f2f31;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.admin-sidebar .sidebar-top { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.admin-sidebar .brand-name { font-weight:700; margin-top:6px; }
+.admin-sidebar .sidebar-user { border-bottom: 1px solid rgba(255,255,255,0.03); }
+.admin-sidebar .user-name { font-weight:600; }
+.admin-sidebar .user-email { font-size: 0.85rem; }
+.admin-sidebar .nav-link { color: rgba(255,255,255,0.92); padding: 10px 12px; border-radius: 4px; margin-bottom:6px; }
+.admin-sidebar .nav-link:hover { background: rgba(255,255,255,0.03); color: #fff; text-decoration:none; }
+.admin-sidebar .nav-link i { width:20px; text-align:center; }
+.admin-sidebar .btn-outline-light { border-color: rgba(255,255,255,0.12); color:#fff; }
+.admin-sidebar .btn-outline-light:hover { background: rgba(255,255,255,0.04); }
