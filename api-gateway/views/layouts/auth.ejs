@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/auth.css">
+    <% if (recaptchaSiteKey) { %>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <% } %>
   </head>
   <body>
-    <main class="container py-5">
+    <main class="auth-layout">
       <%- body %>
     </main>
     <%- include('../partials/footer') %>

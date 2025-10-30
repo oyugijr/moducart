@@ -24,6 +24,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 // Default layout for ejs-mate: can be overridden per-view with `layout('...')`
 app.locals.layout = 'layouts/main';
+// expose reCAPTCHA site key (if set) to views
+app.locals.recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY || '';
 
 // Static
 app.use(express.static(path.join(__dirname, "public")));

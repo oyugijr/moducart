@@ -18,6 +18,15 @@ router.get("/login", renderLogin);
 router.post("/login", handleLogin);
 
 router.get("/register", renderRegister);
+router.post("/register", async (req, res, next) => {
+	// delegate to controller's handler
+	try {
+		const { handleRegister } = await import("../controllers/authController.js");
+		return handleRegister(req, res, next);
+	} catch (err) {
+		next(err);
+	}
+});
 router.post("/logout", handleLogout);
 
 export default router;

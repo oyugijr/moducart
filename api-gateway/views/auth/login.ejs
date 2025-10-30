@@ -1,23 +1,34 @@
 <% layout('layouts/auth') %>
-<div class="row justify-content-center">
-  <div class="col-md-5">
-    <div class="card p-4">
-      <h4 class="mb-3">Admin Login</h4>
+
+<div class="auth-split">
+  <div class="auth-left d-none d-md-flex align-items-center justify-content-center">
+    <div class="brand-left text-start">
+      <h1>ModuCart</h1>
+    </div>
+  </div>
+
+  <div class="auth-right d-flex align-items-center justify-content-center">
+    <div class="auth-panel">
       <% if (typeof error !== 'undefined' && error) { %>
         <div class="alert alert-danger"><%= error %></div>
       <% } %>
-      <form method="post" action="/auth/login">
+
+      <div class="auth-tabs mb-3">
+        <a class="active">Login</a>
+        <a href="/auth/register">Register</a>
+      </div>
+
+      <form method="post" action="/auth/login" class="auth-form">
         <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input name="username" class="form-control" type="email" required>
+          <input name="username" class="form-control form-control-lg" type="email" placeholder="E-mail Address" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input name="password" class="form-control" type="password" required>
+          <input name="password" class="form-control form-control-lg" type="password" placeholder="Password" required>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <button class="btn btn-primary" type="submit">Sign in</button>
-          <a href="/auth/register">Register</a>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-light auth-btn" type="submit">Login</button>
+          <a class="text-white-50 ms-2" href="/auth/forgot">Forgot Password?</a>
         </div>
       </form>
     </div>
