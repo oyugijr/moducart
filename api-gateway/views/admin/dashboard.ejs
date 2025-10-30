@@ -17,51 +17,51 @@
 <div class="row stats-row mb-4">
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="stat-icon"><i class="fa-solid fa-cart-shopping fa-2x"></i></div>
+      <div class="stat-icon"></div>
       <div class="stat-body">
         <div class="stat-label">Completed Orders</div>
-        <div class="stat-value"><%= stats.completedOrders ?? 205 %></div>
+        <div class="stat-value"><%= Number(stats?.completedOrders) || 0 %></div>
       </div>
     </div>
   </div>
 
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="stat-icon"><i class="fa-solid fa-shopping-cart fa-2x"></i></div>
+      <div class="stat-icon"></div>
       <div class="stat-body">
         <div class="stat-label">Pending Orders</div>
-        <div class="stat-value"><%= stats.pendingOrders ?? 1 %></div>
+        <div class="stat-value"><%= Number(stats?.pendingOrders) || 0 %></div>
       </div>
     </div>
   </div>
 
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="stat-icon"><i class="fa-solid fa-dollar-sign fa-2x"></i></div>
+      <div class="stat-icon"></div>
       <div class="stat-body">
         <div class="stat-label">Total Earnings</div>
-        <div class="stat-value">Ksh. <%= (Number(stats.revenue) || 10,000).toLocaleString() %></div>
+        <div class="stat-value">Ksh. <%= (Number(stats?.revenue) || 0).toLocaleString() %></div>
       </div>
     </div>
   </div>
 
   <div class="col-lg-3 col-md-6">
     <div class="stat-card">
-      <div class="stat-icon"><i class="fa-solid fa-grid fa-2x"></i></div>
+      <div class="stat-icon"></div>
       <div class="stat-body">
         <div class="stat-label">Total Products</div>
-        <div class="stat-value"><%= stats.products ?? 1250 %></div>
+        <div class="stat-value"><%= Number(stats?.products) || 0 %></div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Large blank area like screenshot where widgets or charts can go -->
-<!-- <div class="dashboard-canvas">
+<div class="dashboard-canvas">
   <div class="placeholder-canvas">
-    <!-- Future widgets (charts, lists) can be placed here -->
-  <!-- </div>
-</div> --> 
+    <!-- Canvas area for charts / widgets (intentionally blank) -->
+  </div>
+</div>
 
 <!-- Recent orders table (compact) -->
 <!-- <div class="mt-4">

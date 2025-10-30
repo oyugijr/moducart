@@ -34,6 +34,16 @@ body.admin-layout {
   margin-right: 18px;
 }
 
+/* Keep the left square clean (no icon) and slightly inset to match screenshot */
+.stat-card .stat-icon::after {
+  content: '';
+  display:block;
+  width:44px;
+  height:44px;
+  background: #093b3f;
+  border-radius:6px;
+}
+
 .stat-card .stat-body {
   flex:1;
   display:flex;
@@ -58,6 +68,8 @@ body.admin-layout {
   font-weight: 800;
   color: #222;
 }
+
+.stat-card .stat-body .stat-value { text-align: right; }
 
 .dashboard-canvas {
   background: #fff;
