@@ -28,5 +28,6 @@ router.post("/register", async (req, res, next) => {
 	}
 });
 router.post("/logout", handleLogout);
+router.get("/logout", handleLogout);
 
 export default router;

@@ -100,8 +100,25 @@ export const handleLogin = async (req, res) => {
 };
 
 export const handleLogout = (req, res) => {
-  req.session.destroy(() => {
-    res.clearCookie("connect.sid");
-    res.redirect("/auth/login");
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Session destroy error during logout', err);
+      // If client expects JSON (AJAX), send status, otherwise redirect with message
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.status(500).json({ error: 'Logout failed' });
+      }
+      // fallback: clear cookie and redirect anyway
+      res.clearCookie('connect.sid');
+      return res.redirect('/auth/login');
+    }
+
+    // Successful logout
+    res.clearCookie('connect.sid');
+    // If AJAX request, respond with JSON so SPA clients can handle it
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ ok: true, redirect: '/auth/login' });
+    }
+
+    return res.redirect('/auth/login');
   });
 };

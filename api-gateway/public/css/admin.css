@@ -107,6 +107,12 @@ body.admin-layout {
   color: #fff;
   display: flex;
   flex-direction: column;
+  /* make the sidebar stick in view and scroll independently */
+  position: sticky;
+  top: 0;
+  height: 100vh; /* ensure it fills viewport height */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
 .admin-sidebar .sidebar-top { border-bottom: 1px solid rgba(255,255,255,0.04); }
 .admin-sidebar .brand-name { font-weight:700; margin-top:6px; }
@@ -118,3 +124,26 @@ body.admin-layout {
 .admin-sidebar .nav-link i { width:20px; text-align:center; }
 .admin-sidebar .btn-outline-light { border-color: rgba(255,255,255,0.12); color:#fff; }
 .admin-sidebar .btn-outline-light:hover { background: rgba(255,255,255,0.04); }
+
+/* Maji-style sidebar additions */
+.sidebar-top { padding-top: 8px; padding-bottom: 6px; }
+.sidebar-avatar { width:72px; height:72px; border-radius:50%; border:4px solid rgba(255,255,255,0.06); background:#fff; padding:4px; }
+.sidebar-user .username { font-size:1.05rem; font-weight:700; color:#dfeff0; }
+.sidebar-user .user-email { font-size:0.85rem; color:rgba(255,255,255,0.55); }
+.sidebar-section-title { font-size:0.72rem; color:rgba(255,255,255,0.25); text-transform:uppercase; letter-spacing:0.09em; margin-top:8px; }
+
+.sidebar-nav .nav-link { color: rgba(255,255,255,0.9); padding: 10px 6px; border-radius: 4px; }
+.sidebar-nav .nav-link i { width:28px; text-align:left; color: #9fc7c6; font-size:1.05rem; }
+.sidebar-nav .nav-link .chev { color: rgba(255,255,255,0.25); font-weight:700; }
+.sidebar-nav .nav-link:hover { background: rgba(255,255,255,0.02); color: #fff; text-decoration:none; }
+.sidebar-nav .nav-link:hover i { color:#a8e0df; }
+
+/* small adjustments for compact look */
+.admin-sidebar { padding: 18px 14px; }
+.admin-sidebar .nav { margin-top: 6px; }
+
+@media (max-width: 767px) {
+  .admin-sidebar { width: 56px; }
+  .sidebar-user .username, .sidebar-user .user-email, .sidebar-section-title, .sidebar-nav span { display:none; }
+  .sidebar-avatar { width:38px; height:38px; border-width:2px; }
+}
