@@ -113,6 +113,8 @@ body.admin-layout {
   height: 100vh; /* ensure it fills viewport height */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  /* prevent scroll chaining: when user scrolls the sidebar, don't let the parent page scroll */
+  overscroll-behavior: contain;
 }
 .admin-sidebar .sidebar-top { border-bottom: 1px solid rgba(255,255,255,0.04); }
 .admin-sidebar .brand-name { font-weight:700; margin-top:6px; }
