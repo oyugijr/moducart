@@ -1,15 +1,15 @@
 version: "3.9"
 
 services:
-  # api-gateway:
-  #   build: ./api-gateway
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - catalog-api
-  #     - basket-api
-  #     - discount-api
-  #     - ordering-api
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - catalog-api
+      - basket-api
+      - discount-api
+      - ordering-api
 
   catalog-api:
     build: .
