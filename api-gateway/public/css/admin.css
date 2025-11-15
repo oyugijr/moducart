@@ -1,0 +1,151 @@
+/* Admin dashboard styles tuned to match provided screenshot
+   - stat cards at top with small icon box on the left and large value on the right
+   - white canvas area below for charts/widgets
+   - styles intentionally scoped to avoid impacting global styles
+*/
+
+body.admin-layout {
+  background: #f5f6f7;
+}
+
+.stats-row {
+  margin-top: 12px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 18px 22px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  min-height: 110px;
+}
+
+.stat-card .stat-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background: #093b3f; /* darker teal */
+  color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-right: 18px;
+}
+
+/* Keep the left square clean (no icon) and slightly inset to match screenshot */
+.stat-card .stat-icon::after {
+  content: '';
+  display:block;
+  width:44px;
+  height:44px;
+  background: #093b3f;
+  border-radius:6px;
+}
+
+.stat-card .stat-body {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.stat-card .stat-left {
+  display:flex;
+  flex-direction:column;
+}
+
+.stat-card .stat-label {
+  font-size: 0.78rem;
+  color: #6c757d;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stat-card .stat-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.stat-card .stat-body .stat-value { text-align: right; }
+
+.dashboard-canvas {
+  background: #fff;
+  min-height: 420px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.placeholder-canvas {
+  height: 380px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#e2e2e2;
+  font-size:1.1rem;
+}
+
+/* Tighter table look for recent orders */
+.table-sm th, .table-sm td { vertical-align: middle; }
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .stat-card { padding:12px; }
+  .stat-card .stat-icon { width:52px; height:52px; }
+  .stat-card .stat-value { font-size:1.4rem; }
+}
+
+/* Sidebar styles */
+.admin-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #0f2f31;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  /* make the sidebar stick in view and scroll independently */
+  position: sticky;
+  top: 0;
+  height: 100vh; /* ensure it fills viewport height */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  /* prevent scroll chaining: when user scrolls the sidebar, don't let the parent page scroll */
+  overscroll-behavior: contain;
+}
+.admin-sidebar .sidebar-top { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.admin-sidebar .brand-name { font-weight:700; margin-top:6px; }
+.admin-sidebar .sidebar-user { border-bottom: 1px solid rgba(255,255,255,0.03); }
+.admin-sidebar .user-name { font-weight:600; }
+.admin-sidebar .user-email { font-size: 0.85rem; }
+.admin-sidebar .nav-link { color: rgba(255,255,255,0.92); padding: 10px 12px; border-radius: 4px; margin-bottom:6px; }
+.admin-sidebar .nav-link:hover { background: rgba(255,255,255,0.03); color: #fff; text-decoration:none; }
+.admin-sidebar .nav-link i { width:20px; text-align:center; }
+.admin-sidebar .btn-outline-light { border-color: rgba(255,255,255,0.12); color:#fff; }
+.admin-sidebar .btn-outline-light:hover { background: rgba(255,255,255,0.04); }
+
+/* Maji-style sidebar additions */
+.sidebar-top { padding-top: 8px; padding-bottom: 6px; }
+.sidebar-avatar { width:72px; height:72px; border-radius:50%; border:4px solid rgba(255,255,255,0.06); background:#fff; padding:4px; }
+.sidebar-user .username { font-size:1.05rem; font-weight:700; color:#dfeff0; }
+.sidebar-user .user-email { font-size:0.85rem; color:rgba(255,255,255,0.55); }
+.sidebar-section-title { font-size:0.72rem; color:rgba(255,255,255,0.25); text-transform:uppercase; letter-spacing:0.09em; margin-top:8px; }
+
+.sidebar-nav .nav-link { color: rgba(255,255,255,0.9); padding: 10px 6px; border-radius: 4px; }
+.sidebar-nav .nav-link i { width:28px; text-align:left; color: #9fc7c6; font-size:1.05rem; }
+.sidebar-nav .nav-link .chev { color: rgba(255,255,255,0.25); font-weight:700; }
+.sidebar-nav .nav-link:hover { background: rgba(255,255,255,0.02); color: #fff; text-decoration:none; }
+.sidebar-nav .nav-link:hover i { color:#a8e0df; }
+
+/* small adjustments for compact look */
+.admin-sidebar { padding: 18px 14px; }
+.admin-sidebar .nav { margin-top: 6px; }
+
+@media (max-width: 767px) {
+  .admin-sidebar { width: 56px; }
+  .sidebar-user .username, .sidebar-user .user-email, .sidebar-section-title, .sidebar-nav span { display:none; }
+  .sidebar-avatar { width:38px; height:38px; border-width:2px; }
+}

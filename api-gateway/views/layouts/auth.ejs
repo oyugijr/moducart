@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/auth.css">
+    <% if (recaptchaSiteKey) { %>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <% } %>
+  </head>
+  <body>
+    <main class="auth-layout">
+      <%- body %>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

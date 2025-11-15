@@ -35,7 +35,7 @@ docker run -p 5000:5000 moducart-api-gateway
 
         ```text
         Email: admin@moducart.local
-        Password: Admin@123
+        Password: ModuCart123!
         ```
 
 4. To view dashboard: <http://localhost:5000/admin/dashboard>

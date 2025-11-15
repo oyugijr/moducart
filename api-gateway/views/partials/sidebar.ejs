@@ -1,4 +1,4 @@
-<div class="p-3">
+<!-- <div class="p-3">
   <div class="mb-4 text-center">
     <img src="/images/logo.png" alt="ModuCart" style="height:48px">
     <h6 class="mt-2">ModuCart</h6>
@@ -17,4 +17,37 @@
       </form>
     </li>
   </ul>
-</div>
+</div> -->
+
+<% const _active = (typeof active === 'string') ? active : ''; %>
+
+<aside class="admin-sidebar p-3">
+  <div class="sidebar-top text-center mb-3">
+    <img src="/images/default_user.png" alt="Admin" class="sidebar-avatar img-circle">
+    <div class="sidebar-user mt-2">
+      <div class="username">ModuCart Admin</div>
+      <div class="user-email">admin@moducart.local</div>
+    </div>
+  </div>
+
+  <div class="sidebar-section-title">MODUCART CONTROL PANEL</div>
+
+  <nav class="sidebar-nav mt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/dashboard"><i class="fa fa-home me-3"></i><span>Dashboard</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/manage-products"><i class="fa fa-list me-3"></i><span>Products</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/shops"><i class="fa fa-store me-3"></i><span>Shops</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/manage-orders"><i class="fa fa-box-open me-3"></i><span>Orders</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/finance"><i class="fa fa-wallet me-3"></i><span>Finance</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/manage-users"><i class="fa fa-users me-3"></i><span>Users</span><span class="chev ms-auto">›</span></a></li>
+      <li class="nav-item"><a class="nav-link d-flex align-items-center" href="/admin/messages"><i class="fa fa-envelope me-3"></i><span>User Communication</span><span class="chev ms-auto">›</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="mt-auto pt-3">
+    <form action="/auth/logout" method="post">
+      <button class="btn btn-outline-light w-100" type="submit">Sign out</button>
+    </form>
+  </div>
+
+</aside>

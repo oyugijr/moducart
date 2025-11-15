@@ -1,48 +1,87 @@
 <% layout('layouts/admin') %>
 
-<div class="row g-3">
-  <div class="col-md-3">
-    <div class="card-small">
-      <h6>Products</h6>
-      <h3><%= stats.products %></h3>
+<!-- <% if (serviceErrors && serviceErrors.length) { %>
+  <div class="mb-3">
+    <div class="alert alert-warning">
+      <strong>Some backend services are unavailable:</strong>
+      <ul>
+        <% serviceErrors.forEach(err => { %>
+          <li><%= err %></li>
+        <% }) %>
+      </ul>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="card-small">
-      <h6>Orders</h6>
-      <h3><%= stats.orders %></h3>
+<% } %> -->
+
+<!-- Top stats row like screenshot -->
+<div class="row stats-row mb-4">
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="stat-icon"></div>
+      <div class="stat-body">
+        <div class="stat-label">Completed Orders</div>
+        <div class="stat-value"><%= Number(stats?.completedOrders) || 0 %></div>
+      </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="card-small">
-      <h6>Users</h6>
-      <h3><%= stats.users %></h3>
+
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="stat-icon"></div>
+      <div class="stat-body">
+        <div class="stat-label">Pending Orders</div>
+        <div class="stat-value"><%= Number(stats?.pendingOrders) || 0 %></div>
+      </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="card-small">
-      <h6>Revenue</h6>
-      <h3>$<%= stats.revenue %></h3>
+
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="stat-icon"></div>
+      <div class="stat-body">
+        <div class="stat-label">Total Earnings</div>
+        <div class="stat-value">Ksh. <%= (Number(stats?.revenue) || 0).toLocaleString() %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-card">
+      <div class="stat-icon"></div>
+      <div class="stat-body">
+        <div class="stat-label">Total Products</div>
+        <div class="stat-value"><%= Number(stats?.products) || 0 %></div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="mt-4">
-  <h5>Recent Orders</h5>
-  <table class="table table-sm">
-    <thead>
-      <tr><th>Order ID</th><th>User</th><th>Total</th><th>Status</th><th>Date</th></tr>
-    </thead>
-    <tbody>
-      <% (orders || []).slice(0,6).forEach(o => { %>
-        <tr>
-          <td><%= o.id || o.orderId || '—' %></td>
-          <td><%= o.userId || '—' %></td>
-          <td>$<%= o.total || '0.00' %></td>
-          <td><%= o.status || 'PENDING' %></td>
-          <td><%= o.createdAt ? new Date(o.createdAt).toLocaleString() : '—' %></td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+<!-- Large blank area like screenshot where widgets or charts can go -->
+<div class="dashboard-canvas">
+  <div class="placeholder-canvas">
+    <!-- Canvas area for charts / widgets (intentionally blank) -->
+  </div>
 </div>
+
+<!-- Recent orders table (compact) -->
+<!-- <div class="mt-4">
+  <h5>Recent Orders</h5>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead>
+        <tr><th>Order ID</th><th>User</th><th>Total</th><th>Status</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        <% (orders || []).slice(0,6).forEach(o => { %>
+          <tr>
+            <td><%= o.id || o.orderId || '—' %></td>
+            <td><%= o.userId || o.user || '—' %></td>
+            <td>Ksh. <%= Number(o.total ?? o.amount ?? o.totalAmount ?? 0).toLocaleString() %></td>
+            <td><%= o.status || 'PENDING' %></td>
+            <td><%= o.createdAt ? new Date(o.createdAt).toLocaleString() : '—' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div> -->

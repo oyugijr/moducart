@@ -1,0 +1,73 @@
+/* Auth page split layout styles (left white panel + right cyan panel)
+   Matches provided design: centered form, large left brand, rounded inputs
+*/
+
+html, body, .auth-layout {
+  height: 100%;
+  margin: 0;
+}
+
+.auth-split {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-left {
+  flex: 1 1 45%;
+  background: #ffffff;
+}
+
+.brand-left h1 {
+  font-weight: 700;
+  font-size: 28px;
+  color: #777;
+  margin-left: 40px;
+}
+
+.auth-right {
+  flex: 1 1 55%;
+  background: #34c8f7; /* bright cyan */
+  color: #fff;
+  padding: 60px 30px;
+}
+
+.auth-panel {
+  width: 420px;
+  max-width: 90%;
+}
+
+.auth-tabs a {
+  color: rgba(255,255,255,0.9);
+  margin-right: 20px;
+  text-decoration: none;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+}
+
+.auth-tabs a.active {
+  border-color: #fff;
+  font-weight: 700;
+}
+
+.auth-form .form-control {
+  border-radius: 6px;
+  height: 44px;
+}
+
+.auth-btn {
+  background: #fff;
+  color: #0b4b4f;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 8px 18px;
+}
+
+.text-white-50 {
+  color: rgba(255,255,255,0.9) !important;
+}
+
+@media (max-width: 767px) {
+  .auth-left { display: none !important; }
+  .auth-right { flex: 1 1 100%; padding: 40px 20px; }
+  .auth-panel { width: 100%; }
+}

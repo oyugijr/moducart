@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <!-- Admin styles and icons -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pbVfV6bYH0Y3u2zQ9l6x2rQpQmZb0Q1P4lsl0E6f0K1h3b6L7qK+2kY7b9g8kX9q0d3q1Q2+Y6c5G8v3j4Y1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body class="admin-layout">
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <%- include('../partials/sidebar') %>
+
+      <!-- Page content wrapper -->
+      <div id="page-content-wrapper" class="flex-grow-1">
+        <!-- Topbar / header -->
+        <%- include('../partials/topbar') %>
+
+        <div class="container-fluid p-4">
+          <%- include('../partials/alert') %>
+          <%- body %>
+        </div>
+
+        <%- include('../partials/footer') %>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>
